@@ -223,7 +223,7 @@ class RegexSearchInstance(object):
             self.handle_search_result(result, document, start_iter, wrapped_around, button)
         else:
             # No match found
-            if self.should_wrap_around(wrapped_around):
+            if self.should_wrap_around(wrapped_around, start_iter):
                 # Let's wrap around, searching the whole document
                 self.search_document(document.get_start_iter(), True,button)
             else:
@@ -345,7 +345,7 @@ class RegexSearchInstance(object):
         else:
             return False
 
-    def should_wrap_around(self, wrapped_around):
+    def should_wrap_around(self, wrapped_around, start_iter):
         """
         Returns True if the search should wrap around (i.e., restart from the
         begining); returns False, otherwise.
