@@ -7,3 +7,4 @@ Description=Text search and replace using regular expressions.
 Authors=Daniel d'Andrada T. de Carvalho <daniel.carvalho@indt.org.br>, Ben Fisher halfhourhacks.blogspot.com, Adam Victor Nazareth Brandizzi <brandizzi+gedit-re-search@gmail.com>
 Copyright=GPL
 Website=http://bitbucket.org/brandizzi/gedit-re-search/
+#Icon=gedit-re-search

@@ -12,24 +12,24 @@ class SearchDialog(gtk.Dialog):
         self.table.attach(self.search_label, 
                 0, 1, 0, 1,
                 xoptions=gtk.FILL, yoptions=gtk.FILL,
-                xpadding=6, ypadding=6)
+                xpadding=12, ypadding=6)
         self.search_entry = gtk.Entry()
         self.table.attach(self.search_entry, 
                 1, 2, 0, 1,
                 xoptions=gtk.EXPAND|gtk.FILL, yoptions=gtk.FILL,
-                xpadding=6, ypadding=6)
+                xpadding=12, ypadding=6)
         self.search_label.set_mnemonic_widget(self.search_entry)
         
         self.replace_label = self._get_label(_("Replace _with: "))
         self.table.attach(self.replace_label,
                 0, 1, 1, 2,
                 xoptions=gtk.FILL, yoptions=gtk.FILL,
-                xpadding=6, ypadding=6)
+                xpadding=12, ypadding=6)
         self.replace_entry = gtk.Entry()
         self.table.attach(self.replace_entry, 
                 1, 2, 1, 2,
                 xoptions=gtk.EXPAND|gtk.FILL, yoptions=gtk.FILL,
-                xpadding=6, ypadding=6)
+                xpadding=12, ypadding=6)
         self.replace_label.set_mnemonic_widget(self.replace_entry)
         
         # Options
@@ -41,21 +41,21 @@ class SearchDialog(gtk.Dialog):
                 _("_Match case"))
         self.table.attach(self.case_sensitive_checkbutton, 
                 0, 2, 2, 3,
-                xpadding=6, ypadding=6)
+                xpadding=12, ypadding=6)
         
         self.wrap_around_checkbutton = gtk.CheckButton(
                 _("_Wrap around"))
         self.table.attach(self.wrap_around_checkbutton, 
                 0, 2, 3, 4, 
                 xoptions=gtk.EXPAND|gtk.FILL, yoptions=gtk.FILL,
-                xpadding=6, ypadding=6)
+                xpadding=12, ypadding=6)
         
         self.backreferences_checkbutton = gtk.CheckButton(
                 _("Use _backreferences"))
         self.table.attach(self.backreferences_checkbutton, 
                 0, 2, 4, 5,
                 xoptions=gtk.EXPAND|gtk.FILL, yoptions=gtk.FILL,
-                xpadding=6, ypadding=6)
+                xpadding=12, ypadding=6)
 
         self.close_button = self.add_button(gtk.STOCK_CLOSE, 
                 gtk.RESPONSE_ACCEPT)
