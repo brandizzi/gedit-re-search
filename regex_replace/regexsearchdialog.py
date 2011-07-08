@@ -13,7 +13,7 @@ class SearchDialog(gtk.Dialog):
                 0, 1, 0, 1,
                 xoptions=gtk.FILL, yoptions=gtk.FILL,
                 xpadding=12, ypadding=6)
-        self.search_entry = gtk.Entry()
+        self.search_entry = gtk.combo_box_entry_new_text()
         self.table.attach(self.search_entry, 
                 1, 2, 0, 1,
                 xoptions=gtk.EXPAND|gtk.FILL, yoptions=gtk.FILL,
@@ -25,7 +25,7 @@ class SearchDialog(gtk.Dialog):
                 0, 1, 1, 2,
                 xoptions=gtk.FILL, yoptions=gtk.FILL,
                 xpadding=12, ypadding=6)
-        self.replace_entry = gtk.Entry()
+        self.replace_entry = gtk.combo_box_entry_new_text()
         self.table.attach(self.replace_entry, 
                 1, 2, 1, 2,
                 xoptions=gtk.EXPAND|gtk.FILL, yoptions=gtk.FILL,

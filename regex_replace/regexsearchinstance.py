@@ -113,7 +113,7 @@ class RegexSearchInstance(object):
         regex = self.create_regex()
         if regex==None: return
         
-        replace_string = self._replace_text_box.get_text()
+        replace_string = self._replace_text_box.child.get_text()
         if not self._use_backreferences_check.get_active():
             # turn \ into \\ so that backreferences are not done.
             replace_string = replace_string.replace('\\','\\\\') 
@@ -139,7 +139,7 @@ class RegexSearchInstance(object):
         Creates a new re.regex object from the content of the search box.
         """
         try:
-            sought_text = unicode(self._search_text_box.get_text(), "utf-8")
+            sought_text = unicode(self._search_text_box.child.get_text(), "utf-8")
             # note multi-line flag, and dot does not match newline.
             if self._case_sensitive_check.get_active():
                 regex = re.compile(sought_text, re.MULTILINE)
@@ -175,7 +175,7 @@ class RegexSearchInstance(object):
         """
         if not self.enable_replace:
             replace_text = replace_text_entry.get_text()
-            search_text  =  self._search_text_box.get_text()
+            search_text  =  self._search_text_box.child.get_text()
             
             if len(search_text) > 0 and len(replace_text) > 0:
                 self._replace_button.set_sensitive(True)
@@ -229,7 +229,7 @@ class RegexSearchInstance(object):
             else:
                 # We've already wrapped around. There's no match in the whole document.
                 self.show_alert_dialog(u"No match found for regular expression \"%s\"." 
-                        % self._search_text_box.get_text())
+                        % self._search_text_box.child.get_text())
 
     def handle_search_result(self, result, document, start_iter, wrapped_around = False,button='search'):
         """
@@ -297,7 +297,7 @@ class RegexSearchInstance(object):
         document.move_mark(selection_bound_mark, result_end_iter)
 
         if (button == 'replace'):
-            replace_text = self._replace_text_box.get_text()
+            replace_text = self._replace_text_box.child.get_text()
             self.replace_text(document,replace_text, result)
 
         view = self._window.get_active_view()
