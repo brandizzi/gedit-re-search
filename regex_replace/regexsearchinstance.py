@@ -28,6 +28,9 @@ class RegexSearchInstance(object):
         self.create_menu_item()
         self.load_dialog()
 
+        self.search_terms = set()
+        self.replace_terms = set()
+
     def update_ui(self):
         """
         Changes gEdit UI to enable the search.
@@ -112,7 +115,9 @@ class RegexSearchInstance(object):
         
         regex = self.create_regex()
         if regex==None: return
-        
+        # Registering current search term and replacement
+        self.register_search_and_replace_terms()
+
         replace_string = self._replace_text_box.child.get_text()
         if not self._use_backreferences_check.get_active():
             # turn \ into \\ so that backreferences are not done.
@@ -139,7 +144,7 @@ class RegexSearchInstance(object):
         Creates a new re.regex object from the content of the search box.
         """
         try:
-            sought_text = unicode(self._search_text_box.child.get_text(), "utf-8")
+            sought_text = unicode(self.get_search_term(), "utf-8")
             # note multi-line flag, and dot does not match newline.
             if self._case_sensitive_check.get_active():
                 regex = re.compile(sought_text, re.MULTILINE)
@@ -158,7 +163,7 @@ class RegexSearchInstance(object):
         search_text_entry
             The gtk.TextEntry with the text to be searched.
         """
-        search_text  = search_text_entry.get_text()
+        search_text  = self.get_search_term()
         replace_text_entry = self._replace_text_box
 
         valid_regex = self.valid_regular_expression(search_text)
@@ -174,8 +179,8 @@ class RegexSearchInstance(object):
             The gtk.TextEntry with the text that will replace the sought one.
         """
         if not self.enable_replace:
-            replace_text = replace_text_entry.get_text()
-            search_text  =  self._search_text_box.child.get_text()
+            replace_text = self.get_replace_term()
+            search_text  =  self.get_search_term()
             
             if len(search_text) > 0 and len(replace_text) > 0:
                 self._replace_button.set_sensitive(True)
@@ -213,6 +218,9 @@ class RegexSearchInstance(object):
 
         regex = self.create_regex()
         if regex==None: return
+
+        # Registering current search term and replacement
+        self.register_search_and_replace_terms(button == "replace")
             
         text = unicode(document.get_text(start_iter, end_iter, False), "utf-8")
         result = regex.search(text)
@@ -229,7 +237,7 @@ class RegexSearchInstance(object):
             else:
                 # We've already wrapped around. There's no match in the whole document.
                 self.show_alert_dialog(u"No match found for regular expression \"%s\"." 
-                        % self._search_text_box.child.get_text())
+                        % self.get_search_term())
 
     def handle_search_result(self, result, document, start_iter, wrapped_around = False,button='search'):
         """
@@ -371,6 +379,7 @@ class RegexSearchInstance(object):
             The regex to match.
         """
         text = document.get_text(document.get_start_iter(), document.get_end_iter())
+        document.remove_tag_by_name("found", document.get_start_iter(), document.get_end_iter())
         for match in regex.finditer(text):
             start = document.get_iter_at_offset(match.start())
             end = document.get_iter_at_offset(match.end())
@@ -384,3 +393,20 @@ class RegexSearchInstance(object):
                                 _(s))
         dlg.run()
         dlg.hide()
+
+    def get_search_term(self):
+        return self._search_text_box.child.get_text()
+
+    def get_replace_term(self):
+        return self._replace_text_box.child.get_text()
+
+    def register_search_and_replace_terms(self, register_replace=True):
+        search_term = self.get_search_term()
+        if search_term not in self.search_terms:
+            self._search_text_box.prepend_text(search_term)
+            self.search_terms.add(search_term)
+        if register_replace:
+            replace_term = self.get_replace_term()
+            if replace_term not in self.replace_terms:
+                self._replace_text_box.prepend_text(replace_term)
+                self.replace_terms.add(replace_term)

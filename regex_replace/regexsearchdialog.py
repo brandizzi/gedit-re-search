@@ -1,9 +1,18 @@
 import gtk
 
+CHARS_IN_ENTRIES = 40
+
 class SearchDialog(gtk.Dialog):
 
     def __init__(self):
-        gtk.Dialog.__init__(self, title=_("Replace"))
+        self.previous_searches = []
+        self.previous_replacements = []
+    
+        gtk.Dialog.__init__(self, title=_("Replace"), 
+                flags=gtk.DIALOG_NO_SEPARATOR)
+
+        self.action_area.expand = True
+        self.action_area.fill = True
 
         self.table = gtk.Table(homogeneous=False)
      
@@ -14,6 +23,7 @@ class SearchDialog(gtk.Dialog):
                 xoptions=gtk.FILL, yoptions=gtk.FILL,
                 xpadding=12, ypadding=6)
         self.search_entry = gtk.combo_box_entry_new_text()
+        self.search_entry.get_child().set_width_chars(CHARS_IN_ENTRIES)
         self.table.attach(self.search_entry, 
                 1, 2, 0, 1,
                 xoptions=gtk.EXPAND|gtk.FILL, yoptions=gtk.FILL,
@@ -26,6 +36,7 @@ class SearchDialog(gtk.Dialog):
                 xoptions=gtk.FILL, yoptions=gtk.FILL,
                 xpadding=12, ypadding=6)
         self.replace_entry = gtk.combo_box_entry_new_text()
+        self.replace_entry.get_child().set_width_chars(CHARS_IN_ENTRIES)
         self.table.attach(self.replace_entry, 
                 1, 2, 1, 2,
                 xoptions=gtk.EXPAND|gtk.FILL, yoptions=gtk.FILL,
@@ -76,6 +87,12 @@ class SearchDialog(gtk.Dialog):
 
         self.find_button = self.add_button(gtk.STOCK_FIND, 
                 gtk.RESPONSE_ACCEPT)
+
+        def redefine_packing(widget):
+            _, _, padding, _ = self.action_area.query_child_packing(widget)
+            self.action_area.set_child_packing(widget, True, True, padding, _)
+
+        self.action_area.foreach(redefine_packing)
 
         self.set_resizable(False)
         
