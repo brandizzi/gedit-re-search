@@ -1,6 +1,6 @@
 import gtk
 
-CHARS_IN_ENTRIES = 40
+CHARS_IN_ENTRIES = 32
 
 class SearchDialog(gtk.Dialog):
 
@@ -11,36 +11,28 @@ class SearchDialog(gtk.Dialog):
         gtk.Dialog.__init__(self, title=_("Replace"), 
                 flags=gtk.DIALOG_NO_SEPARATOR)
 
-        self.action_area.expand = True
-        self.action_area.fill = True
-
         self.table = gtk.Table(homogeneous=False)
+        self.table.set_col_spacings(12)
+        self.table.set_row_spacings(12)
+        self.table.set_border_width(12)
      
         # Entries
         self.search_label = self._get_label(_("_Search for: "))
         self.table.attach(self.search_label, 
-                0, 1, 0, 1,
-                xoptions=gtk.FILL, yoptions=gtk.FILL,
-                xpadding=12, ypadding=6)
+                0, 1, 0, 1, xoptions=gtk.FILL, yoptions=gtk.FILL)
         self.search_entry = gtk.combo_box_entry_new_text()
         self.search_entry.get_child().set_width_chars(CHARS_IN_ENTRIES)
         self.table.attach(self.search_entry, 
-                1, 2, 0, 1,
-                xoptions=gtk.EXPAND|gtk.FILL, yoptions=gtk.FILL,
-                xpadding=12, ypadding=6)
+                1, 2, 0, 1, xoptions=gtk.EXPAND|gtk.FILL, yoptions=gtk.FILL)
         self.search_label.set_mnemonic_widget(self.search_entry)
         
         self.replace_label = self._get_label(_("Replace _with: "))
-        self.table.attach(self.replace_label,
-                0, 1, 1, 2,
-                xoptions=gtk.FILL, yoptions=gtk.FILL,
-                xpadding=12, ypadding=6)
+        self.table.attach(self.replace_label, 0, 1, 1, 2, 
+                xoptions=gtk.FILL, yoptions=gtk.FILL)
         self.replace_entry = gtk.combo_box_entry_new_text()
         self.replace_entry.get_child().set_width_chars(CHARS_IN_ENTRIES)
-        self.table.attach(self.replace_entry, 
-                1, 2, 1, 2,
-                xoptions=gtk.EXPAND|gtk.FILL, yoptions=gtk.FILL,
-                xpadding=12, ypadding=6)
+        self.table.attach(self.replace_entry, 1, 2, 1, 2, 
+                xoptions=gtk.EXPAND|gtk.FILL, yoptions=gtk.FILL)
         self.replace_label.set_mnemonic_widget(self.replace_entry)
         
         # Options
@@ -50,23 +42,16 @@ class SearchDialog(gtk.Dialog):
         #self.table.attach(self.regex_search_checkbutton, 1, 2, 0, 1)
         self.case_sensitive_checkbutton = gtk.CheckButton(
                 _("_Match case"))
-        self.table.attach(self.case_sensitive_checkbutton, 
-                0, 2, 2, 3,
-                xpadding=12, ypadding=6)
+        self.table.attach(self.case_sensitive_checkbutton, 0, 2, 2, 3)
         
-        self.wrap_around_checkbutton = gtk.CheckButton(
-                _("_Wrap around"))
-        self.table.attach(self.wrap_around_checkbutton, 
-                0, 2, 3, 4, 
-                xoptions=gtk.EXPAND|gtk.FILL, yoptions=gtk.FILL,
-                xpadding=12, ypadding=6)
+        self.wrap_around_checkbutton = gtk.CheckButton(_("_Wrap around"))
+        self.table.attach(self.wrap_around_checkbutton, 0, 2, 3, 4, 
+                xoptions=gtk.EXPAND|gtk.FILL, yoptions=gtk.FILL)
         
         self.backreferences_checkbutton = gtk.CheckButton(
                 _("Use _backreferences"))
-        self.table.attach(self.backreferences_checkbutton, 
-                0, 2, 4, 5,
-                xoptions=gtk.EXPAND|gtk.FILL, yoptions=gtk.FILL,
-                xpadding=12, ypadding=6)
+        self.table.attach(self.backreferences_checkbutton, 0, 2, 4, 5,
+                xoptions=gtk.EXPAND|gtk.FILL, yoptions=gtk.FILL)
 
         self.close_button = self.add_button(gtk.STOCK_CLOSE, 
                 gtk.RESPONSE_ACCEPT)
@@ -87,12 +72,6 @@ class SearchDialog(gtk.Dialog):
 
         self.find_button = self.add_button(gtk.STOCK_FIND, 
                 gtk.RESPONSE_ACCEPT)
-
-        def redefine_packing(widget):
-            _, _, padding, _ = self.action_area.query_child_packing(widget)
-            self.action_area.set_child_packing(widget, True, True, padding, _)
-
-        self.action_area.foreach(redefine_packing)
 
         self.set_resizable(False)
         
