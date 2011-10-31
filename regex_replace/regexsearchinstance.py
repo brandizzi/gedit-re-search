@@ -49,7 +49,7 @@ class RegexSearchInstance(object):
         action.connect("activate", self.on_open_regex_dialog)
 
         action_group = gtk.ActionGroup("RegexSearchActions")
-        action_group.add_action(action)
+        action_group.add_action_with_accel(action, "<control>r")
         
         manager = self._window.get_ui_manager()
         manager.insert_action_group(action_group, -1)
