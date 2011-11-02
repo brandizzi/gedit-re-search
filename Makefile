@@ -3,3 +3,6 @@ install:
 
 pack:
 	tar zvcf versions/gedit-research-$(shell date +%Y%m%d).tar.gz regex_replace/ regex_replace.gedit-plugin install.sh
+
+tag:
+	hg tag $(shell date +%Y%m%d)
