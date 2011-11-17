@@ -168,6 +168,8 @@ class RegexSearchInstance(object):
 
         valid_regex = self.valid_regular_expression(search_text)
         self._find_button.set_sensitive(valid_regex)
+        self._replace_button.set_sensitive(valid_regex)
+        self._replace_all_button.set_sensitive(valid_regex)
 
         self.on_replace_text_changed(replace_text_entry)
 
