@@ -150,7 +150,6 @@ class RegexSearchInstance(object):
             number_of_chars = document.get_end_iter().get_offset() - \
                     return_line_iter.get_offset()
                     
-        print number_of_chars
         current_line_offset = current_line_offset \
                 if current_line_offset < number_of_chars \
                 else number_of_chars
