@@ -2,6 +2,8 @@ import gtk
 
 CHARS_IN_ENTRIES = 32
 
+RESPONSE_REPLACE_ALL = 1
+
 class SearchDialog(gtk.Dialog):
 
     def __init__(self):
@@ -54,9 +56,9 @@ class SearchDialog(gtk.Dialog):
                 xoptions=gtk.EXPAND|gtk.FILL, yoptions=gtk.FILL)
 
         self.close_button = self.add_button(gtk.STOCK_CLOSE, 
-                gtk.RESPONSE_ACCEPT)
+                gtk.RESPONSE_CLOSE)
         self.replace_all_button = self.add_button(_("Replace All"), 
-                gtk.RESPONSE_ACCEPT)
+                RESPONSE_REPLACE_ALL)
 
         # Creating a button just like the one from the default Replace dialog
         self.replace_button = gtk.Button()

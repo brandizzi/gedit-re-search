@@ -64,6 +64,7 @@ class RegexSearchInstance(object):
            - Put needed widgets in object variables. 
         """
         self._search_dialog = rsd.SearchDialog()
+        self._search_dialog.set_default_response(gtk.RESPONSE_ACCEPT)
         self._search_dialog.hide()
         self._search_dialog.set_transient_for(self._window)
         self._search_dialog.set_destroy_with_parent(True)
@@ -81,9 +82,11 @@ class RegexSearchInstance(object):
         close_button.connect("clicked", self.on_close_button_clicked)
 
         self._search_text_box = self._search_dialog.search_entry
+        self._search_text_box.child.set_activates_default(True)
         self._search_text_box.connect("changed", self.on_search_text_changed)
 
         self._replace_text_box = self._search_dialog.replace_entry
+        self._replace_text_box.child.set_activates_default(True)
         self._replace_text_box.connect("changed", self.on_replace_text_changed)
 
         self._wrap_around_check = self._search_dialog.wrap_around_checkbutton
