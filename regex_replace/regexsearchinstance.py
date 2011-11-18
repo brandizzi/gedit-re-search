@@ -109,6 +109,10 @@ class RegexSearchInstance(object):
         Callback for "Replace all" button when clicked.
         """
         document = self._window.get_active_document()
+        current_iter = document.get_iter_at_mark(document.get_insert())
+        current_line = current_iter.get_line()
+        current_line_offset = current_iter.get_line_offset()
+        current_offset = current_iter.get_offset()
         start_iter = document.get_start_iter()
         end_iter = document.get_end_iter()
         alltext = unicode(document.get_text(start_iter, end_iter, False), "utf-8")
@@ -130,7 +134,30 @@ class RegexSearchInstance(object):
         document.move_mark(selection_bound_mark, end_iter)
         document.delete_selection(False, False)
         document.insert_at_cursor(new_string)
-      
+
+        # Returning to the original point
+        number_of_lines = document.get_line_count()
+
+        return_line = current_line if current_line < number_of_lines \
+                else number_of_lines
+        return_line_iter = document.get_iter_at_line(return_line)
+        if return_line < number_of_lines-1:
+            next_line = return_line+1
+            next_line_iter = document.get_iter_at_line(next_line)
+            number_of_chars = next_line_iter.get_offset() - \
+                    return_line_iter.get_offset() - 1
+        else:
+            number_of_chars = document.get_end_iter().get_offset() - \
+                    return_line_iter.get_offset()
+                    
+        print number_of_chars
+        current_line_offset = current_line_offset \
+                if current_line_offset < number_of_chars \
+                else number_of_chars
+
+        return_iter = document.get_iter_at_line_offset(
+                current_line, current_line_offset)
+        document.place_cursor(return_iter)
         self.show_alert_dialog(u"%d replacement(s)." % (n_replacements))
 
     def on_close_button_clicked(self, close_button):
