@@ -6,3 +6,7 @@ pack:
 
 tag:
 	hg tag $(shell date +%Y%m%d)
+
+clean:
+	find . -name '*~' -exec rm {} \;
+	
