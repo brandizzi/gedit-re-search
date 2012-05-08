@@ -67,7 +67,8 @@ class RegexSearchInstance(object):
         self._search_dialog.hide()
         self._search_dialog.set_transient_for(self._window)
         self._search_dialog.set_destroy_with_parent(True)
-        self._search_dialog.connect("delete-event", self._search_dialog.hide_on_delete)
+        self._search_dialog.connect("delete-event", 
+                lambda _1, _2: self._search_dialog.hide_on_delete())
 
         self._find_button = self._search_dialog.find_button
         self._find_button.connect("clicked", self.on_find_button_clicked)
@@ -408,7 +409,7 @@ class RegexSearchInstance(object):
         regex
             The regex to match.
         """
-        text = document.get_text(document.get_start_iter(), document.get_end_iter(), False)
+        text = document.get_text(document.get_start_iter(), document.get_end_iter(), True)
         document.remove_tag_by_name("found", document.get_start_iter(), document.get_end_iter())
         for match in regex.finditer(text):
             start = document.get_iter_at_offset(match.start())
@@ -417,9 +418,9 @@ class RegexSearchInstance(object):
 
     def show_alert_dialog(self, s):
         dlg = gtk.MessageDialog(self._window,
-                                gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
-                                gtk.MESSAGE_INFO,
-                                gtk.BUTTONS_CLOSE,
+                                gtk.DialogFlags.DESTROY_WITH_PARENT,
+                                gtk.MessageType.INFO,
+                                gtk.ButtonsType.CLOSE,
                                 _(s))
         dlg.run()
         dlg.hide()
