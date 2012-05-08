@@ -1,6 +1,5 @@
-import gedit
 from gettext import gettext as _
-import gtk
+import gi.repository.Gtk as gtk
 import os
 import re
 
@@ -64,11 +63,11 @@ class RegexSearchInstance(object):
            - Put needed widgets in object variables. 
         """
         self._search_dialog = rsd.SearchDialog()
-        self._search_dialog.set_default_response(gtk.RESPONSE_ACCEPT)
+        self._search_dialog.set_default_response(gtk.ResponseType.ACCEPT)
         self._search_dialog.hide()
         self._search_dialog.set_transient_for(self._window)
         self._search_dialog.set_destroy_with_parent(True)
-        self._search_dialog.connect("delete_event", self._search_dialog.hide_on_delete)
+        self._search_dialog.connect("delete-event", self._search_dialog.hide_on_delete)
 
         self._find_button = self._search_dialog.find_button
         self._find_button.connect("clicked", self.on_find_button_clicked)
@@ -82,11 +81,11 @@ class RegexSearchInstance(object):
         close_button.connect("clicked", self.on_close_button_clicked)
 
         self._search_text_box = self._search_dialog.search_entry
-        self._search_text_box.child.set_activates_default(True)
+        self._search_text_box.get_child().set_activates_default(True)
         self._search_text_box.connect("changed", self.on_search_text_changed)
 
         self._replace_text_box = self._search_dialog.replace_entry
-        self._replace_text_box.child.set_activates_default(True)
+        self._replace_text_box.get_child().set_activates_default(True)
         self._replace_text_box.connect("changed", self.on_replace_text_changed)
 
         self._wrap_around_check = self._search_dialog.wrap_around_checkbutton
@@ -125,7 +124,7 @@ class RegexSearchInstance(object):
         # Registering current search term and replacement
         self.register_search_and_replace_terms()
 
-        replace_string = self._replace_text_box.child.get_text()
+        replace_string = self._replace_text_box.get_child().get_text()
         if not self._use_backreferences_check.get_active():
             # turn \ into \\ so that backreferences are not done.
             replace_string = replace_string.replace('\\','\\\\') 
@@ -336,7 +335,7 @@ class RegexSearchInstance(object):
         document.move_mark(selection_bound_mark, result_end_iter)
 
         if (button == 'replace'):
-            replace_text = self._replace_text_box.child.get_text()
+            replace_text = self._replace_text_box.get_child().get_text()
             self.replace_text(document,replace_text, result)
 
         view = self._window.get_active_view()
@@ -409,7 +408,7 @@ class RegexSearchInstance(object):
         regex
             The regex to match.
         """
-        text = document.get_text(document.get_start_iter(), document.get_end_iter())
+        text = document.get_text(document.get_start_iter(), document.get_end_iter(), False)
         document.remove_tag_by_name("found", document.get_start_iter(), document.get_end_iter())
         for match in regex.finditer(text):
             start = document.get_iter_at_offset(match.start())
@@ -426,18 +425,18 @@ class RegexSearchInstance(object):
         dlg.hide()
 
     def get_search_term(self):
-        return self._search_text_box.child.get_text()
+        return self._search_text_box.get_child().get_text()
 
     def get_replace_term(self):
-        return self._replace_text_box.child.get_text()
+        return self._replace_text_box.get_child().get_text()
 
     def register_search_and_replace_terms(self, register_replace=True):
         search_term = self.get_search_term()
         if search_term not in self.search_terms:
-            self._search_text_box.prepend_text(search_term)
+            self._search_text_box.prepend(None, search_term)
             self.search_terms.add(search_term)
         if register_replace:
             replace_term = self.get_replace_term()
             if replace_term not in self.replace_terms:
-                self._replace_text_box.prepend_text(replace_term)
+                self._replace_text_box.prepend(None, replace_term)
                 self.replace_terms.add(replace_term)

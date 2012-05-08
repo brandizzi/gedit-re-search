@@ -1,22 +1,23 @@
-import gedit
-import gtk
+from gi.repository import GObject, Gedit
 from regexsearchinstance import RegexSearchInstance
 
-class RegexSearch(gedit.Plugin):
+class RegexSearch(GObject.Object, Gedit.WindowActivatable):
     DATA_TAG = "RegexSearchInstance"
+    __gtype_name__ = "GeditRESearch"
+    window = GObject.property(type=Gedit.Window)
 
     def __init__(self):
-        gedit.Plugin.__init__(self)
+        GObject.Object.__init__(self)
 
-    def activate(self, window):
-        regexsearch_instance = RegexSearchInstance(window)
-        window.set_data(self.DATA_TAG, regexsearch_instance)
+    def do_activate(self):
+        regexsearch_instance = RegexSearchInstance(self.window)
+        self.window.set_data(self.DATA_TAG, regexsearch_instance)
 	
-    def deactivate(self, window):
-        regexsearch_instance = window.get_data(self.DATA_TAG)
+    def do_deactivate(self):
+        regexsearch_instance = self.window.get_data(self.DATA_TAG)
         # regexsearch_instance destroy!?
-        window.set_data(self.DATA_TAG, None)
+        self.window.set_data(self.DATA_TAG, None)
 		
-    def update_ui(self, window):
-        regexsearch_instance = window.get_data(self.DATA_TAG)
+    def do_update_ui(self):
+        regexsearch_instance = self.window.get_data(self.DATA_TAG)
         regexsearch_instance.update_ui()
