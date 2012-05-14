@@ -27,7 +27,7 @@ class SearchDialog(gtk.Dialog):
                 1, 2, 0, 1, xoptions=gtk.AttachOptions.EXPAND|gtk.AttachOptions.FILL, yoptions=gtk.AttachOptions.FILL)
         self.search_label.set_mnemonic_widget(self.search_entry)
         
-        self.replace_label = self._get_label(_("Replace _with: "))
+        self.replace_label = self._get_label(_("Re_place with: "))
         self.table.attach(self.replace_label, 0, 1, 1, 2, 
                 xoptions=gtk.AttachOptions.FILL, yoptions=gtk.AttachOptions.FILL)
         self.replace_entry = gtk.ComboBoxText.new_with_entry()
@@ -41,23 +41,26 @@ class SearchDialog(gtk.Dialog):
         #self.regex_search_checkbutton = gtk.CheckButton(
         #        _("Regular expression search"))
         #self.table.attach(self.regex_search_checkbutton, 1, 2, 0, 1)
-        self.case_sensitive_checkbutton = gtk.CheckButton(
+        self.case_sensitive_checkbutton = gtk.CheckButton.new_with_mnemonic(
                 _("_Match case"))
         self.table.attach(self.case_sensitive_checkbutton, 0, 2, 2, 3)
         
-        self.wrap_around_checkbutton = gtk.CheckButton(_("_Wrap around"))
+        self.wrap_around_checkbutton = gtk.CheckButton.new_with_mnemonic(
+                _("_Wrap around"))
         self.table.attach(self.wrap_around_checkbutton, 0, 2, 3, 4, 
-                xoptions=gtk.AttachOptions.EXPAND|gtk.AttachOptions.FILL, yoptions=gtk.AttachOptions.FILL)
+                xoptions=gtk.AttachOptions.EXPAND|gtk.AttachOptions.FILL, 
+                yoptions=gtk.AttachOptions.FILL)
         
-        self.backreferences_checkbutton = gtk.CheckButton(
+        self.backreferences_checkbutton = gtk.CheckButton.new_with_mnemonic(
                 _("Use _backreferences"))
         self.table.attach(self.backreferences_checkbutton, 0, 2, 4, 5,
-                xoptions=gtk.AttachOptions.EXPAND|gtk.AttachOptions.FILL, yoptions=gtk.AttachOptions.FILL)
+                xoptions=gtk.AttachOptions.EXPAND|gtk.AttachOptions.FILL, 
+                yoptions=gtk.AttachOptions.FILL)
 
         self.close_button = self.add_button(gtk.STOCK_CLOSE, 
                 gtk.ResponseType.CLOSE)
-        self.replace_all_button = self.add_button(_("Replace All"), 
-                RESPONSE_REPLACE_ALL)
+        self.replace_all_button = self.add_button(
+                _("Replace _All"), RESPONSE_REPLACE_ALL)
 
         # Creating a button just like the one from the default Replace dialog
         self.replace_button = gtk.Button()
@@ -81,7 +84,7 @@ class SearchDialog(gtk.Dialog):
 
         
     def _get_label(self, text):
-        label = gtk.Label(text)
+        label = gtk.Label.new_with_mnemonic(text)
         label.set_alignment(0, 0.5)
         label.set_use_underline(True)
         return label
