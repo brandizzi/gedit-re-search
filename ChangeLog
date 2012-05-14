@@ -1,0 +1,6 @@
+2012-05-14 Adam Victor Nazareth Brandizzi <brandizzi@gmail.com>
+
+    * Repaired a bug which broke mnemonics. Now all components of the dialog are
+      accessible through mnemonics again.
+      
+    * Long needed ChangeLog created :)
