@@ -1,5 +1,5 @@
 [Plugin]
-Loader=python
+Loader=python3
 Module=regex_replace
 IAge=3
 Name=Regex Search and Replace
