@@ -1,5 +1,5 @@
 from gi.repository import GObject, Gedit
-from regexsearchinstance import RegexSearchInstance
+from .regexsearchinstance import RegexSearchInstance
 
 class RegexSearch(GObject.Object, Gedit.WindowActivatable):
     DATA_TAG = "RegexSearchInstance"
@@ -11,13 +11,14 @@ class RegexSearch(GObject.Object, Gedit.WindowActivatable):
 
     def do_activate(self):
         regexsearch_instance = RegexSearchInstance(self.window)
-        self.window.set_data(self.DATA_TAG, regexsearch_instance)
+        setattr(self.window, self.DATA_TAG, regexsearch_instance)
+				
 	
     def do_deactivate(self):
-        regexsearch_instance = self.window.get_data(self.DATA_TAG)
+        regexsearch_instance = getattr(self.window, self.DATA_TAG)
         # regexsearch_instance destroy!?
-        self.window.set_data(self.DATA_TAG, None)
+        delattr(self.window, self.DATA_TAG)
 		
     def do_update_ui(self):
-        regexsearch_instance = self.window.get_data(self.DATA_TAG)
+        regexsearch_instance = getattr(self.window, self.DATA_TAG)
         regexsearch_instance.update_ui()

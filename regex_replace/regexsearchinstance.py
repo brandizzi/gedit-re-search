@@ -3,7 +3,7 @@ import gi.repository.Gtk as gtk
 import os
 import re
 
-import regexsearchdialog as rsd
+from . import regexsearchdialog as rsd
 
 # String for creating menu option
 ui_str = """
@@ -118,7 +118,7 @@ class RegexSearchInstance(object):
         current_offset = current_iter.get_offset()
         start_iter = document.get_start_iter()
         end_iter = document.get_end_iter()
-        alltext = unicode(document.get_text(start_iter, end_iter, False), "utf-8")
+        alltext = document.get_text(start_iter, end_iter, False)
         
         regex = self.create_regex()
         if regex==None: return
@@ -160,7 +160,7 @@ class RegexSearchInstance(object):
         return_iter = document.get_iter_at_line_offset(
                 current_line, current_line_offset)
         document.place_cursor(return_iter)
-        self.show_alert_dialog(u"%d replacement(s)." % (n_replacements))
+        self.show_alert_dialog("%d replacement(s)." % (n_replacements))
 
     def on_close_button_clicked(self, close_button):
         """
@@ -173,14 +173,14 @@ class RegexSearchInstance(object):
         Creates a new re.regex object from the content of the search box.
         """
         try:
-            sought_text = unicode(self.get_search_term(), "utf-8")
+            sought_text = self.get_search_term()
             # note multi-line flag, and dot does not match newline.
             if self._case_sensitive_check.get_active():
                 regex = re.compile(sought_text, re.MULTILINE)
             else:
                 regex = re.compile(sought_text, re.MULTILINE | re.IGNORECASE)
         except:
-            self.show_alert_dialog(u"Invalid regular expression.")
+            self.show_alert_dialog("Invalid regular expression.")
             return None
         return regex
 
@@ -253,7 +253,7 @@ class RegexSearchInstance(object):
         # Registering current search term and replacement
         self.register_search_and_replace_terms(button == "replace")
             
-        text = unicode(document.get_text(start_iter, end_iter, False), "utf-8")
+        text = document.get_text(start_iter, end_iter, False)
         result = regex.search(text)
 
         if result != None:
@@ -267,7 +267,7 @@ class RegexSearchInstance(object):
                 self.search_document(document.get_start_iter(), True,button)
             else:
                 # We've already wrapped around. There's no match in the whole document.
-                self.show_alert_dialog(u"No match found for regular expression \"%s\"." 
+                self.show_alert_dialog("No match found for regular expression \"%s\"." 
                         % self.get_search_term())
 
     def handle_search_result(self, result, document, start_iter, wrapped_around = False,button='search'):
@@ -376,7 +376,7 @@ class RegexSearchInstance(object):
         if len(text) > 0:
             # Verifying if the regular expression is valid
             try:
-                re.compile(unicode(text, "utf-8"))
+                re.compile(text)
             except re.error:
                 return False
             else:
