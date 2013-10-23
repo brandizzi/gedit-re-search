@@ -1,6 +1,8 @@
-2012-05-14 Adam Victor Nazareth Brandizzi <brandizzi@gmail.com>
+2013-10-23 Adam Victor Nazareth Brandizzi <brandizzi@gmail.com>
 
     * Changed to be compatible with Python 3 (contribution from Albert Schubert!)
+
+2012-05-14 Adam Victor Nazareth Brandizzi <brandizzi@gmail.com>
 
     * Repaired a bug which broke mnemonics. Now all components of the dialog are
       accessible through mnemonics again.
