@@ -118,7 +118,7 @@ class RegexSearchInstance(object):
         current_offset = current_iter.get_offset()
         start_iter = document.get_start_iter()
         end_iter = document.get_end_iter()
-        alltext = document.get_text(start_iter, end_iter, False)
+        alltext = self.get_document_text(document, start_iter, end_iter)
         
         regex = self.create_regex()
         if regex==None: return
@@ -253,7 +253,7 @@ class RegexSearchInstance(object):
         # Registering current search term and replacement
         self.register_search_and_replace_terms(button == "replace")
             
-        text = document.get_text(start_iter, end_iter, False)
+        text = self.get_document_text(document, start_iter, end_iter)
         result = regex.search(text)
 
         if result != None:
@@ -409,7 +409,7 @@ class RegexSearchInstance(object):
         regex
             The regex to match.
         """
-        text = document.get_text(document.get_start_iter(), document.get_end_iter(), True)
+        text = self.get_document_text(document)
         document.remove_tag_by_name("found", document.get_start_iter(), document.get_end_iter())
         for match in regex.finditer(text):
             start = document.get_iter_at_offset(match.start())
@@ -424,6 +424,14 @@ class RegexSearchInstance(object):
                                 _(s))
         dlg.run()
         dlg.hide()
+
+    def get_document_text(self, document, start_iter=None, end_iter=None):
+        if start_iter is None:
+            start_iter = document.get_start_iter()
+        if end_iter is None:
+            end_iter = document.get_end_iter()
+
+        return document.get_text(start_iter, end_iter, False).decode('UTF-8')
 
     def get_search_term(self):
         return self._search_text_box.get_child().get_text()
