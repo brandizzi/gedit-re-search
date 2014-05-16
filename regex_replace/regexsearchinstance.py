@@ -118,7 +118,7 @@ class RegexSearchInstance(object):
         current_offset = current_iter.get_offset()
         start_iter = document.get_start_iter()
         end_iter = document.get_end_iter()
-        alltext = self.get_document_text(start_iter, end_iter)
+        alltext = self.get_document_text(document)
         
         regex = self.create_regex()
         if regex==None: return
@@ -251,7 +251,7 @@ class RegexSearchInstance(object):
         # Registering current search term and replacement
         self.register_search_and_replace_terms(button == "replace")
             
-        text = self.get_document_text(start_iter)
+        text = self.get_document_text(document, start_iter)
         result = regex.search(text)
 
         if result != None:
