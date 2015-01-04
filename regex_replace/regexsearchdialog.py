@@ -50,11 +50,6 @@ class SearchDialog(gtk.Dialog):
         self.table.attach(self.wrap_around_checkbutton, 0, 2, 3, 4, 
                 xoptions=gtk.EXPAND|gtk.FILL, yoptions=gtk.FILL)
         
-        self.backreferences_checkbutton = gtk.CheckButton(
-                _("Use _backreferences"))
-        self.table.attach(self.backreferences_checkbutton, 0, 2, 4, 5,
-                xoptions=gtk.EXPAND|gtk.FILL, yoptions=gtk.FILL)
-
         self.close_button = self.add_button(gtk.STOCK_CLOSE, 
                 gtk.RESPONSE_CLOSE)
         self.replace_all_button = self.add_button(_("Replace All"), 

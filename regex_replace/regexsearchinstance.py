@@ -90,7 +90,6 @@ class RegexSearchInstance(object):
         self._replace_text_box.connect("changed", self.on_replace_text_changed)
 
         self._wrap_around_check = self._search_dialog.wrap_around_checkbutton
-        self._use_backreferences_check = self._search_dialog.backreferences_checkbutton
         self._case_sensitive_check = self._search_dialog.case_sensitive_checkbutton
 
         self._search_dialog.table.show_all()
@@ -126,10 +125,7 @@ class RegexSearchInstance(object):
         self.register_search_and_replace_terms()
 
         replace_string = self._replace_text_box.child.get_text()
-        if not self._use_backreferences_check.get_active():
-            # turn \ into \\ so that backreferences are not done.
-            replace_string = replace_string.replace('\\','\\\\') 
-        
+
         new_string, n_replacements = regex.subn(replace_string, alltext)
         
         selection_bound_mark = document.get_mark("selection_bound")
@@ -354,10 +350,7 @@ class RegexSearchInstance(object):
             The regex match result.
         """
         try:
-            if not self._use_backreferences_check.get_active():
-                replace_text = replace_string
-            else:
-                replace_text = result.expand(replace_string) # perform backslash expansion, like \1
+            replace_text = result.expand(replace_string) # perform backslash expansion, like \1
             document.delete_selection(False, False)
             document.insert_at_cursor(replace_text)
         except re.error:
