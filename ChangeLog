@@ -1,3 +1,8 @@
+2015-01-04 Adam Victor Nazareth Brandizzi <brandizzi@gmail.com>
+
+	* Dropping out option for using or not backreferences. Now all searches use
+	  backreferences.
+
 2014-05-17 Adam Victor Nazareth Brandizzi <brandizzi@gmail.com>
 
     * Ticket #5 Solved
