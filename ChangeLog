@@ -1,3 +1,8 @@
+2015-01-04 Adam Victor Nazareth Brandizzi <brandizzi@gmail.com>
+
+	* Dropping out option for using or not backreferences. Now all searches use
+	  backreferences.
+
 2013-10-23 Adam Victor Nazareth Brandizzi <brandizzi@gmail.com>
 
     * Changed to use python3 loader, used by Gedit 3.8 (contribution from Albert
