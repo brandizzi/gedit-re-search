@@ -51,12 +51,6 @@ class SearchDialog(gtk.Dialog):
                 xoptions=gtk.AttachOptions.EXPAND|gtk.AttachOptions.FILL, 
                 yoptions=gtk.AttachOptions.FILL)
         
-        self.backreferences_checkbutton = gtk.CheckButton.new_with_mnemonic(
-                _("Use _backreferences"))
-        self.table.attach(self.backreferences_checkbutton, 0, 2, 4, 5,
-                xoptions=gtk.AttachOptions.EXPAND|gtk.AttachOptions.FILL, 
-                yoptions=gtk.AttachOptions.FILL)
-
         self.close_button = self.add_button(gtk.STOCK_CLOSE, 
                 gtk.ResponseType.CLOSE)
         self.replace_all_button = self.add_button(
