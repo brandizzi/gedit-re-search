@@ -1,0 +1,23 @@
+== How to install it ==
+
+As any Gedit plugin, you can install Gedit RE Search either for your own account only or for all accounts in your machine. There is some slight differences if you are installing it for Gedit 3 or Gedit 2.
+
+=== For Gedit 3.8 ===
+
+To use this plugin, you need both Gedit 3.8 (of course) and the {{{ gedit-plugins }}} package. This plugin will not work without {{{ gedit-plugins }}}!
+
+Once you have both Gedit 3.8 and the {{{ gedit-plugins }}} packaged installed, just unpack the content of the [[https://bitbucket.org/brandizzi/gedit-re-search/downloads/gedit3.8-research-20131023.tar.gz|latest downloadable package]] in the directory {{{ ~/.local/share/gedit/plugins }}}.
+
+=== For Gedit 3.0 to 3.6 ===
+
+Once you have Gedit 3 (from 3.0 to 3.6) installed and used, just unpack the content of the [[https://bitbucket.org/brandizzi/gedit-re-search/downloads/gedit3.0-3.6-research-20140517.tar.gz|latest downloadable package]] in the directory {{{ ~/.local/share/gedit/plugins }}}.
+
+=== For Gedit 2 ===
+
+Once you have Gedit installed and used, just unpack the content of the [[https://bitbucket.org/brandizzi/gedit-re-search/downloads/gedit2-research-20140517.tar.gz|latest downloadable package]] in the directory {{{ ~/.gnome2/gedit/plugins }}}.
+
+If you are using Mac OS X, just unpack the content of [[https://bitbucket.org/brandizzi/gedit-re-search/downloads/gedit2-research-20120508.tar.gz|latest downloadable package]] in the {{{ /Applications/gedit.app/Contents/Resources/share/gedit-2/plugins/ }}} directory.
+
+=== install.sh ===
+
+The package has a simple [[https://bitbucket.org/brandizzi/gedit-re-search/src/tip/install.sh|install.sh]] for installing the script to the local user. It works both to Gedit 3 and Gedit 2 Hope this helps.

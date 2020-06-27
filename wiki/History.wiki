@@ -1,0 +1,9 @@
+== History ==
+
+Writing a regex-powered search dialog seems to be the [[http://en.wikipedia.org/wiki/Hello_world_program|Hello world]]  of gEdit plugin development: there are various implementations in the Internet and even I wrote one of these plugins before find the alternative ones.
+
+One of the best options I've found is [[http://danieldandrada.blogspot.com/2006/05/regex-searches-in-gedit.html|a simple plugin]] written by Daniel D'Andrada which only searched on documents. Rafael Silva [[http://rafaelsilva.net/node/103|added the functionality of replacement to the plugin]]. Ben Fisher [[http://halfhourhacks.blogspot.com/2008/03/gedit-regular-expression-plugin.html|corrected some bugs]].
+
+I found this informal approach to free software development amazing but it has some problems. People may start to make updates in the code without knowledge of each other. Also, there is no versioning. So I submitted the plugin to bitbucket and [[Features|made some changes myself]]. Now, we can unify the plugin development. Even if you do want to fork the plugin, it will be easier using Mercurial.
+
+In October 2013, Alexander Schubert from Technische Universität Dresden sent me a version compatible with Python 3 and Gedit 3.8. Thanks Alexander!

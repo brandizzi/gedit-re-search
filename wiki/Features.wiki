@@ -1,0 +1,28 @@
+== Features ==
+
+There are a lot of Gedit regular expressions plugins out there, including some old versions of this one. So, what are the advantages of Gedit RE Search? Well, it is a subjective choice but below we list some interesting aspects of this plugin.
+
+=== Appearance of the default Replace dialog ===
+{{http://i.imgur.com/9PFYx.png|Gedit RE Search dialog}}
+
+The appearance of this plugin is closer to the default Replace dialog from plugin. Well, at least //we// think it is a good thing :) It makes the plugin simple and familiar for most Gedit users.
+
+=== Highlight of found patterns ===
+{{http://i.imgur.com/59AAs.png|Search highlight}}
+
+Gedit RE Search highlights the found strings. It is not updated "on-line" like the default search highlight but it is very helpful.
+
+=== Search and replace history of the current Gedit session ===
+{{http://i.imgur.com/PBCDn.png|Search history}}{{http://i.imgur.com/oiKZI.png|Replace history}}
+
+This plugin stores the last search and replace inputs, easing the process of reusing searches.
+
+=== Keyboard shortcut / Accel keys ===
+One can open Gedit RE Search dialog pressing **Control+R** / **Command+R** (on Mac OS).
+
+=== Does not use Glade ===
+The plugins which were used as base for this one used Python [[http://www.jamesh.id.au/software/libglade/|libglade]], which were slower and a bit disproportional. This version does not use libglade anymore.
+
+=== Supports Gedit 3 ===
+
+Since version 20120508v3, you can use Gedit RE Search on Gedit 3. Since version 20131023v3.8, it works on Gedit 3.8, too, thanks for our contributor Albert Schubert.

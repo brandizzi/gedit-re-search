@@ -1,0 +1,25 @@
+== Welcome ==
+{{http://i.imgur.com/XzRVz.png|Icon}}
+
+**NOTE**: Gedit now has native regular expression search (at least at version 3.18) so this plugin is mostly unnecessary. So, I will not spend a lot of time on it. If it is still useful to you, however, and you have a problem, let me know.
+
+Welcome to Gedit Regular Expression Search Plugin (Gedit RE Search) wiki page! Gedit RE Search is a plugin which provides a regular expression powered search and replace utility for [[http://projects.gnome.org/gedit/|Gedit]].
+
+=== Downloads ===
+
+The most recent versions of the plugin are:
+* For Gedit 3.8: [[https://bitbucket.org/brandizzi/gedit-re-search/downloads/gedit3.8-research-20131023.tar.gz|gedit3.8-research-20131023.tar.gz]] 
+* For Gedit 3.0 to 3.6: [[https://bitbucket.org/brandizzi/gedit-re-search/downloads/gedit3.0-3.6-research-20140517.tar.gz|gedit3.0-3.6-research-20140517.tar.gz]]
+* For Gedit 2: [[https://bitbucket.org/brandizzi/gedit-re-search/downloads/gedit2-research-20140517.tar.gz|gedit2-research-20140517.tar.gz]].
+
+There are older versions at the [[https://bitbucket.org/brandizzi/gedit-re-search/downloads|download page]].
+
+=== How to install it? ===
+
+Take a look at our [[Install|Install page]], where we explain how to install it into [[Install#!for-gedit-3.8|Gedit 3.8]], [[Install#!for-gedit-30-to-36|Gedit 3.0-3.6]] or [[Install#!for-gedit-2|Gedit 2]] and how to use [[Install#!installsh|an install script]].
+
+=== What else? ===
+
+Gedit RE Search is based on earlier plugins with the same functionality. You may be interested in the [[History|history of these plugins and the due credits]]. Also, you may want to know  [[Features|what are the new features]].
+
+{{http://i.imgur.com/59AAs.png|Gedit RE Search screenshot}}
